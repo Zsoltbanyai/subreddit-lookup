@@ -1,0 +1,20 @@
+{
+  "name": "reddit-statistics",
+  "version": "1.0.0",
+  "description": "pet project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "cd frontend && npm run dev & cd backend && npm start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Zsoltbanyai/reddit-statistics.git"
+  },
+  "author": "Zsoltbanyai",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Zsoltbanyai/reddit-statistics/issues"
+  },
+  "homepage": "https://github.com/Zsoltbanyai/reddit-statistics#readme"
+}
