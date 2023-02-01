@@ -1,12 +1,19 @@
 import express from 'express';
 import dotenv from 'dotenv';
+import cors from 'cors';
+
+dotenv.config();
 
 const app = express();
-dotenv.config();
+const router = express.Router();
+app.use(cors({
+    origin: 'http://localhost:5173'
+}));
+app.use('/api', router);
 
 const port = process.env.PORT || 3000;
 
-app.get('/', (req, res) => {
+router.get('/', (req: express.Request, res: express.Response) => {
     res.send('Hello from Express!');
 });
 
