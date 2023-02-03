@@ -1,33 +1,36 @@
-import snoowrap, {Listing, Submission, Subreddit} from 'snoowrap';
+import snoowrap from 'snoowrap';
 import dotenv from 'dotenv';
-import { Timespan } from "./types";
+import {Timespan} from "./type/types";
 
 dotenv.config();
 
 const reddit = new snoowrap({
-    userAgent: 'My Reddit statistics app',
+    userAgent: 'My Reddit app',
     clientId: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
     refreshToken: process.env.REFRESH_TOKEN
 });
 
-const getTopPosts = async (sub: string, time: Timespan, limit: number) => {
-    const subreddit: Subreddit = reddit.getSubreddit(sub);
-    const topPosts: Listing<Submission> = await subreddit.getTop({time: time, limit: limit});
-    let data: {link: string, text: string, score: number}[] = [];
+reddit.config({
+    requestDelay: 1001
+});
 
-    topPosts.forEach((post: Submission) => {
-        data.push({
-            link: post.url,
-            text: post.title,
-            score: post.score
-        })
-    });
+const getPosts = async (subName: string, postType: string, time: Timespan, limit: number) => {
+    try {
+        const subreddit = reddit.getSubreddit(subName);
 
-    return data;
+        return postType === 'TOP'
+            ? await subreddit.getTop({time, limit})
+            : postType === 'HOT'
+                ? await subreddit.getHot({limit})
+                : postType === 'NEW'
+                    ? await subreddit.getNew({limit})
+                    : await subreddit.getControversial({time, limit});
+    } catch (error) {
+        console.error('Error: Subreddit not found');
+    }
 };
 
-
 export const RedditApi = {
-    getTopPosts
+    getPosts
 }

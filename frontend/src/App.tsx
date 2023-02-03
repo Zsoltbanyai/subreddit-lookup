@@ -1,39 +1,45 @@
-import {useEffect, useState} from 'react'
-import reactLogo from './assets/react.svg'
+import React, {useEffect, useState} from 'react'
 import './App.css'
+import {SearchForm} from "./component/SearchForm";
+import {SortingTab} from "./component/SortingTab";
+import {Box} from "@chakra-ui/react";
+import {ShowToast} from "./component/ShowToast";
+import {PostListing, PostType} from '../../backend/src/type/types';
 import {BackendApi} from "./api/backend-api";
 
+
 function App() {
-    const [count, setCount] = useState(0)
+    const [subName, setSubName] = useState<string>('');
+    const [tabIndex, setTabIndex] = useState<number>(0);
+    const [posts, setPosts] = useState<PostListing>();
+    const [isEmpty, setIsEmpty] = useState<boolean>(false);
+
+    const getPosts = async () => {
+        const postType: string = PostType[tabIndex];
+        return await BackendApi.getPosts(subName, postType, 'week', 10);
+    };
+
     useEffect(() => {
-        BackendApi.getData();
-        BackendApi.getSubreddit('javascript', 'week', 5);
-    }, [count])
+        getPosts().then((result) => {
+            setPosts(result);
+            setIsEmpty(Object.keys(result).length === 0);
+        });
+    }, [tabIndex, subName]);
 
     return (
-        <div className="App">
-            <div>
-                <a href="https://vitejs.dev" target="_blank">
-                    <img src="/vite.svg" className="logo" alt="Vite logo" />
-                </a>
-                <a href="https://reactjs.org" target="_blank">
-                    <img src={reactLogo} className="logo react" alt="React logo" />
-                </a>
-            </div>
-            <h1>Vite + React</h1>
-            <div className="card">
-                <button onClick={() => setCount((count) => count + 1)}>
-                    count is {count}
-                </button>
-                <p>
-                    Edit <code>src/App.tsx</code> and save to test HMR
-                </p>
-            </div>
-            <p className="read-the-docs">
-                Click on the Vite and React logos to learn more
-            </p>
+        <div className='App'>
+            <Box width='60vw' mt={85}>
+                <Box mb={3}>
+                    <SearchForm setSubName={setSubName} />
+                </Box>
+                {subName && !isEmpty &&
+                    <SortingTab setTabIndex={setTabIndex} tabIndex={tabIndex} posts={posts}/>
+                }
+                {isEmpty && <ShowToast />}
+            </Box>
         </div>
-    )
+    );
+
 }
 
 export default App

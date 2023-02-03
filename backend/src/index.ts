@@ -19,10 +19,10 @@ router.get('/', (req: express.Request, res: express.Response) => {
     res.send('Hello from Express!');
 });
 
-router.post('/subreddit/top', async (req: express.Request, res: express.Response ) => {
-    const { sub, time, limit } = req.body;
-    const topPosts = await RedditApi.getTopPosts(sub, time, limit);
-    res.send(topPosts);
+router.post('/subreddit/posts', async (req: express.Request, res: express.Response ) => {
+    const { subName, postType, time, limit } = req.body;
+    const posts = await RedditApi.getPosts(subName, postType, time, limit);
+    res.send(posts);
 });
 
 app.listen(port, () => {
