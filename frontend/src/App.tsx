@@ -20,10 +20,14 @@ function App() {
     };
 
     useEffect(() => {
-        getPosts().then((result) => {
-            setPosts(result);
-            setIsEmpty(Object.keys(result).length === 0);
-        });
+        if (subName) {
+            getPosts().then((result) => {
+                setPosts(result);
+                setIsEmpty(Object.keys(result).length === 0);
+            });
+        } else {
+            setPosts(undefined);
+        }
     }, [tabIndex, subName]);
 
     return (

@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {motion, AnimatePresence} from 'framer-motion';
 import {Button, Grid, Input} from '@chakra-ui/react';
 
 interface Prop {
@@ -9,10 +10,18 @@ export const SearchForm: React.FC<Prop> = ({ setSubName }) => {
     const [value, setValue] = useState<string>('');
 
     return (
-        <Grid templateColumns="1fr auto" alignItems="center">
-            <Input value={value} onChange={(e) => setValue(e.target.value)} />
-            <Button onClick={() => setSubName(value)}>Search</Button>
-        </Grid>
+        <AnimatePresence>
+            <motion.div
+                initial={{ y: -20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 1.5 }}
+            >
+                <Grid templateColumns="1fr auto" alignItems="center">
+                    <Input value={value} onChange={(e) => setValue(e.target.value)} />
+                    <Button onClick={() => setSubName(value)}>Search</Button>
+                </Grid>
+            </motion.div>
+        </AnimatePresence>
     );
 
 };

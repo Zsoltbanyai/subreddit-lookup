@@ -2,6 +2,7 @@ import {Stack, Tab, TabList, TabPanel, TabPanels, Tabs, useColorModeValue} from 
 import React from 'react';
 import {PostListing} from '../../../backend/src/type/types';
 import {SubmissionPopover} from "./Submission";
+import {AnimatePresence, motion} from "framer-motion";
 
 interface Props {
     setTabIndex: (tabIndex: number) => void,
@@ -35,21 +36,30 @@ export const SortingTab: React.FC<Props> = ({setTabIndex, tabIndex, posts}) => {
 
     };
 
+
     return (
-        <Tabs defaultIndex={0} isLazy onChange={(index) => setTabIndex(index)} bg={bg}>
-            <TabList>
-                <Tab {...tabStyles} p={2}>Top</Tab>
-                <Tab {...tabStyles} p={2}>Hot</Tab>
-                <Tab {...tabStyles} p={2}>New</Tab>
-                <Tab {...tabStyles} p={2} w='34%'>Controversial</Tab>
-            </TabList>
-            <TabPanels p="2rem">
-                <TabPanel>{listing()}</TabPanel>
-                <TabPanel>{listing()}</TabPanel>
-                <TabPanel>{listing()}</TabPanel>
-                <TabPanel>{listing()}</TabPanel>
-            </TabPanels>
-        </Tabs>
-    );
+        <AnimatePresence>
+            <motion.div
+                initial={{ y: 10, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 1, delay: 0.8 }}
+            >
+                <Tabs defaultIndex={0} isLazy onChange={(index) => setTabIndex(index)} bg={bg}>
+                    <TabList>
+                        <Tab {...tabStyles} p={2}>Top</Tab>
+                        <Tab {...tabStyles} p={2}>Hot</Tab>
+                        <Tab {...tabStyles} p={2}>New</Tab>
+                        <Tab {...tabStyles} p={2} w='34%'>Controversial</Tab>
+                    </TabList>
+                    <TabPanels p="2rem">
+                        <TabPanel>{listing()}</TabPanel>
+                        <TabPanel>{listing()}</TabPanel>
+                        <TabPanel>{listing()}</TabPanel>
+                        <TabPanel>{listing()}</TabPanel>
+                    </TabPanels>
+                </Tabs>
+            </motion.div>
+        </AnimatePresence>
+    )
 
 };

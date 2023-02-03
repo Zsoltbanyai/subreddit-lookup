@@ -12,7 +12,7 @@ const reddit = new snoowrap({
 });
 
 reddit.config({
-    requestDelay: 1001
+    requestDelay: 300
 });
 
 const getPosts = async (subName: string, postType: string, time: Timespan, limit: number) => {
