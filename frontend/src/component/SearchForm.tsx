@@ -17,7 +17,12 @@ export const SearchForm: React.FC<Prop> = ({ setSubName }) => {
                 transition={{ duration: 1.5 }}
             >
                 <Grid templateColumns="1fr auto" alignItems="center">
-                    <Input value={value} onChange={(e) => setValue(e.target.value)} />
+                    <Input value={value} onChange={(e) => setValue(e.target.value)} onKeyDown={e => {
+                            if (e.key === 'Enter') {
+                                setSubName(value);
+                            }
+                        }}
+                    />
                     <Button onClick={() => setSubName(value)}>Search</Button>
                 </Grid>
             </motion.div>
