@@ -4,6 +4,7 @@ import {
     Button, Link, Text, Popover, PopoverArrow,
     PopoverBody, PopoverCloseButton, PopoverContent, PopoverHeader, PopoverTrigger, Stack, Flex
 } from "@chakra-ui/react";
+import ReactMarkdown from "react-markdown";
 
 interface Props {
     submission: Submission;
@@ -29,7 +30,7 @@ export const SubmissionPopover: React.FC<Props> = ({ submission }) => {
                 <PopoverBody p={4}>
                     <Stack>
                         <Text noOfLines={8} fontSize="sm">
-                            {submission.selftext}
+                            <ReactMarkdown children={submission.selftext} />
                         </Text>
                         <Flex justifyContent="space-between">
                             <Text fontWeight="semibold">Upvotes: {submission.ups}</Text>
