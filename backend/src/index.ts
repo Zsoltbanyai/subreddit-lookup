@@ -1,7 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
-import {RedditApi} from './reddit-api';
+import {RedditApi} from './api/reddit-api';
 
 dotenv.config();
 

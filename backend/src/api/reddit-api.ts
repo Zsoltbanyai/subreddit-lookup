@@ -1,6 +1,6 @@
 import snoowrap from 'snoowrap';
 import dotenv from 'dotenv';
-import {Timespan} from "./type/types";
+import {Timespan} from "../type/types";
 
 dotenv.config();
 

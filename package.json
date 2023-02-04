@@ -1,5 +1,5 @@
 {
-  "name": "reddit-statistics",
+  "name": "subreddit-lookup",
   "version": "1.0.0",
   "description": "pet project",
   "main": "index.js",
@@ -9,12 +9,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Zsoltbanyai/reddit-statistics.git"
+    "url": "git+https://github.com/Zsoltbanyai/subreddit-lookup.git"
   },
   "author": "Zsoltbanyai",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Zsoltbanyai/reddit-statistics/issues"
+    "url": "https://github.com/Zsoltbanyai/subreddit-lookup/issues"
   },
-  "homepage": "https://github.com/Zsoltbanyai/reddit-statistics#readme"
+  "homepage": "https://github.com/Zsoltbanyai/subreddit-lookup#readme"
 }
