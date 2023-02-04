@@ -20,8 +20,8 @@ router.get('/', (req: express.Request, res: express.Response) => {
 });
 
 router.post('/subreddit/posts', async (req: express.Request, res: express.Response ) => {
-    const { subName, postType, time, limit } = req.body;
-    const posts = await RedditApi.getPosts(subName, postType, time, limit);
+    const { subName, time, limit } = req.body;
+    const posts = await RedditApi.getPosts(subName, time, limit);
     res.send(posts);
 });
 

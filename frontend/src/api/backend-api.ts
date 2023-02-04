@@ -8,10 +8,9 @@ const axiosURL = axios.create({
     baseURL
 });
 
-const getPosts = async (subName: string, postType: string, time: Timespan, limit: number) => {
+const getPosts = async (subName: string, time: Timespan, limit: number) => {
     const response = await axiosURL.post('subreddit/posts', {
         subName,
-        postType,
         time,
         limit
     });

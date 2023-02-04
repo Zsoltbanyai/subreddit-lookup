@@ -4,31 +4,39 @@ import {SearchForm} from "./component/SearchForm";
 import {SortingTab} from "./component/SortingTab";
 import {Box} from "@chakra-ui/react";
 import {ShowToast} from "./component/ShowToast";
-import {PostListing, PostType} from '../../backend/src/type/types';
+import {Posts} from '../../backend/src/type/types';
 import {BackendApi} from "./api/backend-api";
 
 
 function App() {
     const [subName, setSubName] = useState<string>('');
-    const [tabIndex, setTabIndex] = useState<number>(0);
-    const [posts, setPosts] = useState<PostListing>();
+    const [posts, setPosts] = useState<Posts>({
+        top: null,
+        hot: null,
+        new: null,
+        controversial: null
+    });
     const [isEmpty, setIsEmpty] = useState<boolean>(false);
 
     const getPosts = async () => {
-        const postType: string = PostType[tabIndex];
-        return await BackendApi.getPosts(subName, postType, 'week', 10);
+        return await BackendApi.getPosts(subName, 'week', 10);
     };
 
     useEffect(() => {
         if (subName) {
             getPosts().then((result) => {
-                setPosts(result);
-                setIsEmpty(Object.keys(result).length === 0);
+                setPosts({
+                    top: result.top,
+                    hot: result.hot,
+                    new: result.new,
+                    controversial: result.controversial
+                });
+                setIsEmpty(Object.keys(result).every(key => result[key].length === 0));
             });
         } else {
-            setPosts(undefined);
+            setPosts({ top: null, hot: null, new: null, controversial: null });
         }
-    }, [tabIndex, subName]);
+    }, [subName]);
 
     return (
         <div className='App'>
@@ -37,7 +45,7 @@ function App() {
                     <SearchForm setSubName={setSubName} />
                 </Box>
                 {subName && !isEmpty &&
-                    <SortingTab setTabIndex={setTabIndex} tabIndex={tabIndex} posts={posts}/>
+                    <SortingTab posts={posts}/>
                 }
                 {isEmpty && <ShowToast />}
             </Box>

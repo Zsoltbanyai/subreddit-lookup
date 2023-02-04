@@ -12,20 +12,26 @@ const reddit = new snoowrap({
 });
 
 reddit.config({
-    requestDelay: 300
+    requestDelay: 1001
 });
 
-const getPosts = async (subName: string, postType: string, time: Timespan, limit: number) => {
+const getPosts = async (subName: string, time: Timespan, limit: number) => {
     try {
         const subreddit = reddit.getSubreddit(subName);
 
-        return postType === 'TOP'
-            ? await subreddit.getTop({time, limit})
-            : postType === 'HOT'
-                ? await subreddit.getHot({limit})
-                : postType === 'NEW'
-                    ? await subreddit.getNew({limit})
-                    : await subreddit.getControversial({time, limit});
+        const [top, hot, newPosts, controversial] = await Promise.all([
+            subreddit.getTop({time, limit}),
+            subreddit.getHot({limit}),
+            subreddit.getNew({limit}),
+            subreddit.getControversial({time, limit})
+        ]);
+
+        return {
+            top: top,
+            hot: hot,
+            new: newPosts,
+            controversial: controversial
+        };
     } catch (error) {
         console.error('Error: Subreddit not found');
     }
