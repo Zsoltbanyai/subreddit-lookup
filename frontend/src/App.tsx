@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import './App.css'
 import {SearchForm} from "./component/SearchForm";
 import {SortingTab} from "./component/SortingTab";
-import {Box} from "@chakra-ui/react";
+import {Box, Spinner} from "@chakra-ui/react";
 import {ShowToast} from "./component/ShowToast";
 import {Posts} from '../../backend/src/type/types';
 import {BackendApi} from "./api/backend-api";
@@ -17,9 +17,13 @@ function App() {
         controversial: null
     });
     const [isEmpty, setIsEmpty] = useState<boolean>(false);
+    const [loading, setLoading] = useState<boolean>(false);
 
     const getPosts = async () => {
-        return await BackendApi.getPosts(subName, 'week', 10);
+        setLoading(true);
+        const result = await BackendApi.getPosts(subName, 'week', 10);
+        setLoading(false);
+        return result;
     };
 
     useEffect(() => {
@@ -44,9 +48,18 @@ function App() {
                 <Box mb={3}>
                     <SearchForm setSubName={setSubName} />
                 </Box>
-                {subName && !isEmpty &&
-                    <SortingTab posts={posts}/>
-                }
+                {loading && (
+                    <Box mt='10vh'>
+                        <Spinner
+                            thickness='6px'
+                            speed='0.8s'
+                            emptyColor='gray.300'
+                            color='blue.600'
+                            size='xl'
+                        />
+                    </Box>
+                )}
+                {!loading && subName && !isEmpty && <SortingTab posts={posts} />}
                 {isEmpty && <ShowToast />}
             </Box>
         </div>

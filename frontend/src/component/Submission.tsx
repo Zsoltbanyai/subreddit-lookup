@@ -35,10 +35,10 @@ export const SubmissionPopover: React.FC<Props> = ({ submission }) => {
                     <PopoverCloseButton />
                     <PopoverBody p={4}>
                         <Stack>
-                            <Text noOfLines={8} fontSize="sm">
+                            <div style={{ maxHeight: '10.3em', overflow: 'hidden', fontSize: '12px' }}>
                                 <ReactMarkdown children={submission.selftext} />
-                            </Text>
-                            <Flex justifyContent="space-between">
+                            </div>
+                            <Flex justifyContent="space-between" pt={4}>
                                 <Text fontWeight="semibold">Upvotes: {submission.ups}</Text>
                                 <Text fontWeight="semibold">Comments: {submission.num_comments}</Text>
                             </Flex>
