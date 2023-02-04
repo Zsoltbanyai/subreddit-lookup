@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import './App.css'
 import {SearchForm} from "./component/SearchForm";
 import {SortingTab} from "./component/SortingTab";
-import {Box, Spinner} from "@chakra-ui/react";
+import {Box, Spinner, Text} from "@chakra-ui/react";
 import {ShowToast} from "./component/ShowToast";
 import {Posts} from '../../backend/src/type/types';
 import {BackendApi} from "./api/backend-api";
@@ -45,6 +45,7 @@ function App() {
     return (
         <div className='App'>
             <Box width='60vw' mt={85}>
+                <Text fontWeight='bold' fontSize='30px' mb={5}>What are you interested in?</Text>
                 <Box mb={3}>
                     <SearchForm setSubName={setSubName} />
                 </Box>
