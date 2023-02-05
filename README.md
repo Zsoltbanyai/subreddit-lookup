@@ -16,6 +16,7 @@ The project is fully deployed to Firebase. Click [here](https://subreddit-lookup
 ## Features
 - Display of 10 submissions from top, hot, new, and controversial categories of a subreddit
 - Tabbed navigation between categories
+- In case a subreddit is not found, an error toast is shown on the top right
 
 ## Prerequisites
 - Node.js
