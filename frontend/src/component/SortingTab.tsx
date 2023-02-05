@@ -1,8 +1,8 @@
 import {Stack, Tab, TabList, TabPanel, TabPanels, Tabs, useColorModeValue} from '@chakra-ui/react';
 import React, {useState} from 'react';
 import {PostListing, Posts} from '../../../backend/src/type/types';
-import {SubmissionPopover} from "./Submission";
-import {AnimatePresence, motion} from "framer-motion";
+import {SubmissionPopover} from './Submission';
+import {AnimatePresence, motion} from 'framer-motion';
 
 interface Props {
     posts: Posts
@@ -49,7 +49,7 @@ export const SortingTab: React.FC<Props> = ({ posts }) => {
                         <Tab {...tabStyles} p={2}>New</Tab>
                         <Tab {...tabStyles} p={2} w='34%'>Controversial</Tab>
                     </TabList>
-                    <TabPanels p="2rem">
+                    <TabPanels p='2rem'>
                         <TabPanel>{listing(posts.top)}</TabPanel>
                         <TabPanel>{listing(posts.hot)}</TabPanel>
                         <TabPanel>{listing(posts.new)}</TabPanel>

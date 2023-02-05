@@ -1,11 +1,11 @@
-import React, {useEffect, useState} from 'react'
+import {useEffect, useState} from 'react'
 import './App.css'
-import {SearchForm} from "./component/SearchForm";
-import {SortingTab} from "./component/SortingTab";
-import {Box, Spinner, Text} from "@chakra-ui/react";
-import {ShowToast} from "./component/ShowToast";
+import {SearchForm} from './component/SearchForm';
+import {SortingTab} from './component/SortingTab';
+import {Box, Spinner, Text} from '@chakra-ui/react';
+import {ShowToast} from './component/ShowToast';
 import {Posts} from '../../backend/src/type/types';
-import {BackendApi} from "./api/backend-api";
+import {BackendApi} from './api/backend-api';
 
 
 function App() {

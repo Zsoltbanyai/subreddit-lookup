@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 import {Timespan} from '../../../backend/src/type/types'
 
 

@@ -1,8 +1,8 @@
-import snoowrap from "snoowrap";
+import Snoowrap from 'snoowrap';
 
-export type Submission = snoowrap.Submission;
-export type PostListing = snoowrap.Listing<Submission>;
-export type Timespan = "hour" | "day" | "week" | "month" | "year" | "all";
+export type Submission = Snoowrap.Submission;
+export type PostListing = Snoowrap.Listing<Submission>;
+export type Timespan = 'hour' | 'day' | 'week' | 'month' | 'year' | 'all';
 
 export type Posts = {
         top: PostListing | null;

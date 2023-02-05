@@ -3,9 +3,9 @@ import {Submission} from '../../../backend/src/type/types';
 import {
     Button, Link, Text, Popover, PopoverArrow,
     PopoverBody, PopoverCloseButton, PopoverContent, PopoverHeader, PopoverTrigger, Stack, Flex
-} from "@chakra-ui/react";
-import ReactMarkdown from "react-markdown";
-import { motion } from "framer-motion";
+} from '@chakra-ui/react';
+import ReactMarkdown from 'react-markdown';
+import { motion } from 'framer-motion';
 
 interface Props {
     submission: Submission;
@@ -21,12 +21,12 @@ export const SubmissionPopover: React.FC<Props> = ({ submission }) => {
         >
             <Popover isLazy>
                 <PopoverTrigger>
-                    <Button style={{ width: "100%" }}>
+                    <Button style={{ width: '100%' }}>
                         <Text noOfLines={1}>{submission.title}</Text>
                     </Button>
                 </PopoverTrigger>
-                <PopoverContent zIndex={4} width="400px">
-                    <PopoverHeader borderBottom="1px solid #ddd" p={5}>
+                <PopoverContent zIndex={4} width='400px'>
+                    <PopoverHeader borderBottom='1px solid #ddd' p={5}>
                         <Link href={submission.url} isExternal>
                             {submission.title}
                         </Link>
@@ -38,9 +38,9 @@ export const SubmissionPopover: React.FC<Props> = ({ submission }) => {
                             <div style={{ maxHeight: '10.3em', overflow: 'hidden', fontSize: '12px' }}>
                                 <ReactMarkdown children={submission.selftext} />
                             </div>
-                            <Flex justifyContent="space-between" pt={4}>
-                                <Text fontWeight="semibold">Upvotes: {submission.ups}</Text>
-                                <Text fontWeight="semibold">Comments: {submission.num_comments}</Text>
+                            <Flex justifyContent='space-between' pt={4}>
+                                <Text fontWeight='semibold'>Upvotes: {submission.ups}</Text>
+                                <Text fontWeight='semibold'>Comments: {submission.num_comments}</Text>
                             </Flex>
                         </Stack>
                     </PopoverBody>

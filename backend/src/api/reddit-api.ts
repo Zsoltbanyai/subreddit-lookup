@@ -1,10 +1,10 @@
-import snoowrap from 'snoowrap';
+import Snoowrap from 'snoowrap';
 import dotenv from 'dotenv';
-import {Timespan} from "../type/types";
+import {Timespan} from '../type/types';
 
 dotenv.config();
 
-const reddit = new snoowrap({
+const reddit = new Snoowrap({
     userAgent: 'My Reddit app',
     clientId: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
