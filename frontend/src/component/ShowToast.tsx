@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {useToast} from '@chakra-ui/react';
 
-export const ShowToast: React.FC = ({}) => {
+export const ShowToast: React.FC = () => {
     const [show, setShow] = useState<boolean>(true);
     const toast = useToast();
 

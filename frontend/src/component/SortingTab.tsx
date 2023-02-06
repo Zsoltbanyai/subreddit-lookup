@@ -24,7 +24,7 @@ export const SortingTab: React.FC<Props> = ({ posts }) => {
         bg: {bg}
     };
 
-    const listing = (submissions: PostListing | null) => {
+    const listing = (submissions: PostListing) => {
         if (!submissions) return;
         return (
             <Stack spacing={4}>

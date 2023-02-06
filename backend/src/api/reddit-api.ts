@@ -1,6 +1,6 @@
 import Snoowrap from 'snoowrap';
 import dotenv from 'dotenv';
-import {Timespan} from '../type/types';
+import {Posts, Timespan} from '../type/types';
 
 dotenv.config();
 
@@ -15,7 +15,7 @@ reddit.config({
     requestDelay: 1001
 });
 
-const getPosts = async (subName: string, time: Timespan, limit: number) => {
+const getPosts = async (subName: string, time: Timespan, limit: number): Promise<Posts | void> => {
     try {
         const subreddit = reddit.getSubreddit(subName);
 
@@ -33,7 +33,7 @@ const getPosts = async (subName: string, time: Timespan, limit: number) => {
             controversial: controversial
         };
     } catch (error) {
-        console.error('Error: Subreddit not found');
+        console.log('Error: Subreddit not found or no permission to access');
     }
 };
 

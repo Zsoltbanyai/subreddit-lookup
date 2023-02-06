@@ -272,3 +272,7 @@ sketch
 
 # End of https://www.toptal.com/developers/gitignore/api/intellij,react,node,dotenv
 /subreddit-lookup.iml
+/backend/.eslintignore
+/backend/.eslintrc.json
+/frontend/.eslintignore
+/frontend/.eslintrc.json

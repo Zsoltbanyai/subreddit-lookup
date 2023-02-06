@@ -13,13 +13,9 @@ app.use(cors({
 }));
 app.use('/api', router);
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT;
 
-router.get('/', (req: express.Request, res: express.Response) => {
-    res.send('Hello from Express!');
-});
-
-router.post('/subreddit/posts', async (req: express.Request, res: express.Response ) => {
+router.post('/subreddit/posts', async (req: express.Request, res: express.Response): Promise<void> => {
     const { subName, time, limit } = req.body;
     const posts = await RedditApi.getPosts(subName, time, limit);
     res.send(posts);

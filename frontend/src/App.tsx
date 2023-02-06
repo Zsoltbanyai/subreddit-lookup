@@ -10,14 +10,9 @@ import {BackendApi} from './api/backend-api';
 
 function App() {
     const [subName, setSubName] = useState<string>('');
-    const [posts, setPosts] = useState<Posts>({
-        top: null,
-        hot: null,
-        new: null,
-        controversial: null
-    });
-    const [isEmpty, setIsEmpty] = useState<boolean>(false);
+    const [posts, setPosts] = useState<Posts | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
+    const [shouldToast, setShouldToast] = useState<boolean>(false);
 
     const getPosts = async () => {
         setLoading(true);
@@ -29,22 +24,28 @@ function App() {
     useEffect(() => {
         if (subName) {
             getPosts().then((result) => {
-                setPosts({
-                    top: result.top,
-                    hot: result.hot,
-                    new: result.new,
-                    controversial: result.controversial
-                });
-                setIsEmpty(Object.keys(result).every(key => result[key].length === 0));
+                if (!result || result.new.length === 0) {
+                    setPosts(null);
+                    setShouldToast(true);
+                } else {
+                    setPosts({
+                        top: result.top,
+                        hot: result.hot,
+                        new: result.new,
+                        controversial: result.controversial
+                    });
+                    setShouldToast(false);
+                }
             });
         } else {
-            setPosts({ top: null, hot: null, new: null, controversial: null });
+            setPosts(null);
+            setShouldToast(false);
         }
     }, [subName]);
 
     return (
         <div className='App'>
-            <Box width='60vw' mt={85}>
+            <Box w='65vw' minW='420px' mt={85}>
                 <Text fontWeight='bold' fontSize='30px' mb={5}>What are you interested in?</Text>
                 <Box mb={3}>
                     <SearchForm setSubName={setSubName} />
@@ -60,8 +61,8 @@ function App() {
                         />
                     </Box>
                 )}
-                {!loading && subName && !isEmpty && <SortingTab posts={posts} />}
-                {isEmpty && <ShowToast />}
+                {!loading && subName && posts && <SortingTab posts={posts} />}
+                {!loading && subName && shouldToast && <ShowToast />}
             </Box>
         </div>
     );
