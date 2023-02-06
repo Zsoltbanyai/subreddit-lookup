@@ -45,7 +45,7 @@ function App() {
 
     return (
         <div className='App'>
-            <Box w='66vw' mt={85}>
+            <Box w={{base: '84vw', md: '66vw'}} mt={85}>
                 <Text fontWeight='bold' fontSize='30px' mb={5}>What are you interested in?</Text>
                 <Box mb={3}>
                     <SearchForm setSubName={setSubName} />
